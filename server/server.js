@@ -10,10 +10,22 @@ app.get('/',(req,res) =>{
   console.log('server hit')
   res.send('hello thisere');
 });
-
+app.get('/users',userController.getUsers,(req,res) =>{
+  // res.sendFile(path.resolve(__dirname,'../index.html'));
+  console.log('uiser hit')
+  res.json(res.locals.users);
+});
 
 app.post('/create',userController.createUser,(req,res)=>{
   res.json(res.locals.created);
+});
+
+app.put('/updateUserInfo',userController.updateUserInfo,(req,res)=>{
+  res.json(res.locals.updated);
+})
+
+app.put('/updateGoals',userController.updateGoals,(req,res)=>{
+  res.json(res.locals.updatedGoals);
 });
 
 app.use((err, req, res, next) => {

@@ -14,6 +14,7 @@ mongoose.connect(MONGO_URI, {
   .catch(err => console.log(err));
 
 const userSchema =  new Schema({
+  id:{type:String,required:true},
   firstName:{type: String, required: true},
   lastName:{type: String, required: true},
   age:{type: Number, required: true},
