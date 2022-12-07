@@ -6,8 +6,11 @@ const userController = require('./controller/userController');
 app.use(express.json());
 // app.use(express.static('/'));
 app.get('/',(req,res) =>{
-  res.sendFile(path.resolve(__dirname,'../index.html'));
+  // res.sendFile(path.resolve(__dirname,'../index.html'));
+  console.log('server hit')
+  res.send('hello thisere');
 });
+
 
 app.post('/create',userController.createUser,(req,res)=>{
   res.json(res.locals.created);
