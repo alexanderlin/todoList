@@ -8,24 +8,28 @@ app.use(express.json());
 app.get('/',(req,res) =>{
   // res.sendFile(path.resolve(__dirname,'../index.html'));
   console.log('server hit')
-  res.send('hello thisere');
+  return res.send('hello thisere');
 });
 app.get('/users',userController.getUsers,(req,res) =>{
   // res.sendFile(path.resolve(__dirname,'../index.html'));
-  console.log('uiser hit')
-  res.json(res.locals.users);
+  // console.log('uiser hit')
+  return res.json(res.locals.users);
+});
+
+app.get('/list/:id',userController.getList,(req,res)=>{
+  return res.json(res.locals.list);
 });
 
 app.post('/create',userController.createUser,(req,res)=>{
-  res.json(res.locals.created);
+  return res.json(res.locals.created);
 });
 
 app.put('/updateUserInfo',userController.updateUserInfo,(req,res)=>{
-  res.json(res.locals.updated);
+  return res.json(res.locals.updated);
 })
 
 app.put('/updateGoals',userController.updateGoals,(req,res)=>{
-  res.json(res.locals.updatedGoals);
+  return res.json(res.locals.updatedGoals);
 });
 
 app.use((err, req, res, next) => {
