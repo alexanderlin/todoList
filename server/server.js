@@ -5,23 +5,19 @@ const userController = require('./controller/userController');
 
 app.use(express.json());
 // app.use(express.static('/'));
-app.get('/',(req,res) =>{
-  // res.sendFile(path.resolve(__dirname,'../index.html'));
-  console.log('server hit')
-  return res.send('hello thisere');
+
+app.put('/list/update/',userController.updateList,(req,res)=>{
+  return res.json(res.locals.list);
 });
-app.get('/users',userController.getUsers,(req,res) =>{
+
+app.get('/users/:id',userController.getUsers,(req,res) =>{
   // res.sendFile(path.resolve(__dirname,'../index.html'));
-  // console.log('uiser hit')
-  return res.json(res.locals.users);
+  console.log('uiser hit')
+  return res.json(res.locals.chosenUser);
 });
 
 app.get('/list/:id',userController.getList,(req,res)=>{
   return res.json(res.locals.list);
-});
-
-app.post('/create',userController.createUser,(req,res)=>{
-  return res.json(res.locals.created);
 });
 
 app.put('/updateUserInfo',userController.updateUserInfo,(req,res)=>{
@@ -30,6 +26,22 @@ app.put('/updateUserInfo',userController.updateUserInfo,(req,res)=>{
 
 app.put('/updateGoals',userController.updateGoals,(req,res)=>{
   return res.json(res.locals.updatedGoals);
+});
+
+app.post('/createUser',userController.createUser,(req,res)=>{
+  return res.json(res.locals.created);
+});
+
+app.get('/users',userController.getUsers,(req,res) =>{
+  // res.sendFile(path.resolve(__dirname,'../index.html'));
+  // console.log('uiser hit')
+  return res.json(res.locals.users);
+});
+
+app.get('/',(req,res) =>{
+  // res.sendFile(path.resolve(__dirname,'../index.html'));
+  console.log('server hit')
+  return res.send('hello thisere');
 });
 
 app.use((err, req, res, next) => {

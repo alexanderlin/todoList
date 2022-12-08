@@ -21,8 +21,8 @@ userController.createUser = async(req,res,next) => {
 
 userController.getUsers = async(req,res,next) => {
   try{
-    const users = await models.user.find({});
-    res.locals.users = users;
+    const users = await models.user.findOne({id : req.params.id});
+    res.locals.chosenUser = users;
     return next();
   }catch(err){
     return next({
@@ -44,6 +44,21 @@ userController.getList = async(req,res,next)=>{
       log: 'Express error handler caught in userController.getList',
       status: 400,
       message: { err: 'getList has exploded bad mongoose' },
+    });
+  }
+};
+
+userController.updateList = async(req,res,next)=>{
+  try{
+    const {id,goals} = req.body;
+    await models.user.updateOne({ id }, { goals }, { runValidators: true });
+    res.locals.list = goals;
+    return next();
+  }catch(e){
+    return next({
+      log: 'Express error handler caught in userController.updateList',
+      status: 400,
+      message: { err: 'updateList has exploded bad mongoose' },
     });
   }
 };
