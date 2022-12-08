@@ -21,7 +21,7 @@ userController.createUser = async(req,res,next) => {
 
 userController.getUsers = async(req,res,next) => {
   try{
-    const users = await models.user.findOne({id : req.params.id});
+    const users = await models.user.findOne({firstName: req.params.firstName});
     res.locals.chosenUser = users;
     return next();
   }catch(err){
@@ -35,8 +35,10 @@ userController.getUsers = async(req,res,next) => {
 
 userController.getList = async(req,res,next)=>{
   try{
-    const id = req.params.id;
-    const {goals} = await models.user.findOne({id});
+    const firstName = req.params.firstName;
+    console.log(firstName)
+    const {goals} = await models.user.findOne({firstName});
+    console.log(goals)
     res.locals.list = goals;
     return next();
   }catch(e){
@@ -50,8 +52,8 @@ userController.getList = async(req,res,next)=>{
 
 userController.updateList = async(req,res,next)=>{
   try{
-    const {id,goals} = req.body;
-    await models.user.updateOne({ id }, { goals }, { runValidators: true });
+    const {goals} = req.body;
+    await models.user.updateOne({ firstName: "Zach" }, { goals }, { runValidators: true });
     res.locals.list = goals;
     return next();
   }catch(e){
@@ -89,6 +91,25 @@ userController.updateGoals = async(req,res,next) => {
       log: 'Express error handler caught in userController.updateUser',
       status: 400,
       message: { err: 'updateUser has exploded bad mongoose' },
+    });
+  }
+};
+
+userController.deleteGoals = async(req,res,next) => {
+  try{
+    console.log('helo')
+    const {goal} = req.body;
+    console.log(goal)
+    const {goals} = await models.user.findOneAndUpdate({firstName: "Zach"},{goals: goal}, {
+      new: true
+    });
+    res.locals.deletedGoal = goals;
+    return next();
+  }catch(err){
+    return next({
+      log: 'Express error handler caught in userController.deleteGoals',
+      status: 400,
+      message: { err: 'deleteGoals has exploded bad mongoose' },
     });
   }
 };

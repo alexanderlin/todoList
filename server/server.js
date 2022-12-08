@@ -7,25 +7,29 @@ app.use(express.json());
 // app.use(express.static('/'));
 
 app.put('/list/update/',userController.updateList,(req,res)=>{
-  return res.json(res.locals.list);
+  return res.status(200).json(res.locals.list);
 });
 
-app.get('/users/:id',userController.getUsers,(req,res) =>{
+app.get('/users/:firstName',userController.getUsers,(req,res) =>{
   // res.sendFile(path.resolve(__dirname,'../index.html'));
   console.log('uiser hit')
   return res.json(res.locals.chosenUser);
 });
 
-app.get('/list/:id',userController.getList,(req,res)=>{
+app.get('/list/:firstName',userController.getList,(req,res)=>{
   return res.json(res.locals.list);
 });
 
+app.delete('/delete/:firstName', userController.deleteGoals, (req,res)=>{
+  return res.status(200).json(res.locals.deletedGoal);
+})
+
 app.put('/updateUserInfo',userController.updateUserInfo,(req,res)=>{
-  return res.json(res.locals.updated);
+  return res.status(200).json(res.locals.updated);
 })
 
 app.put('/updateGoals',userController.updateGoals,(req,res)=>{
-  return res.json(res.locals.updatedGoals);
+  return res.status(200).json(res.locals.updatedGoals);
 });
 
 app.post('/createUser',userController.createUser,(req,res)=>{
