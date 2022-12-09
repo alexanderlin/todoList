@@ -3,7 +3,8 @@ import TodoList from './TodoList.jsx'
 
 const TodoContainer = ()=>{
   return <div>
-    <h1>Welcome plantMonster</h1>
+    <h1>Welcome Snugglerd</h1>
+    <h2>CSS Most Featurefullest TodoList Here! CSS</h2>
     <TodoList />
   </div>
 }
