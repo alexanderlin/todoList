@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
-const MONGO_URI = 'MONGODB URL STRING HERE FRIENDS';
+const MONGO_URI = 'mongodb+srv://root:47eDhyKfxwcn5fY@cluster0.n5dtwcq.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose.connect(MONGO_URI, {
   // options for the connect method to parse the URI

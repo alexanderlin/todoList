@@ -25,9 +25,7 @@ const TodoList = ()=>{
       try{
         const listPromise = await fetch('http://localhost:3000/list/Zach');
         const listJson = await listPromise.json();
-        // console.log(listJson, 'inside useEffect')
         setList(listJson);
-        // console.log(listJson, list, 'in getList');
       }catch(e){
         console.error(e);
       }
@@ -35,9 +33,7 @@ const TodoList = ()=>{
       getList();
   },[]);
 
-
   const handleSubmit = (e)=>{
-    // console.log('user:  ', user);
     const requestOptions = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json'},
@@ -84,10 +80,8 @@ const TodoList = ()=>{
 
 const result = [];
 list.forEach((el,i)=>result.push(<TodoItem delete = {deleteGoal} key = {i + user.nemo} goal = {el} />));
-  // console.log('result',result)
   return (<div>
       <form onSubmit={handleSubmit}>
-      {/* <form> */}
         <label>What todo?:<textarea value={inVal} onChange={(e)=>setInVal(e.target.value)} /></label>
         <input type="submit" value="Submit" />
       </form>
@@ -96,52 +90,3 @@ list.forEach((el,i)=>result.push(<TodoItem delete = {deleteGoal} key = {i + user
 }
 
 export default TodoList; 
-
-      // setTodoItems(()=>{
-      //   const result = [];
-      //   for(let i = 0; i < list.length; ++i){
-      //     result.push(<TodoItem key = {i + list[i]} task = {list[i]} />);
-      //   }
-      //   console.log(result,'result')
-      //   return result;
-      // });
-  // const handleSubmit = (e)=>{
-  //   console.log('user:  ', user);
-  //   const requestOptions = {
-  //     method: 'PUT',
-  //     headers: { 'Content-Type': 'application/json'},
-  //     body: JSON.stringify({id: user.id, goals: [...user.goals,inVal]})
-  // };
-  // const updateList = async()=>{
-  //   try{
-  //     const newGoals = await fetch('http://localhost:3000/list/update', requestOptions);
-  //     setUser({...user,goals: [...user.goals,inVal]});
-  //   }catch(e){
-  //     console.error('failed to update list on client side in handleSubmit for entering a new todo:   ', e);
-  //   }
-  // };
-  //   updateList();
-  //   e.preventDefault();
-  // };
-// useEffect(()=>{
-  //   const getList = async ()=>{
-  //     try{
-  //       const listPromise = await fetch('http://localhost:3000/list/one');
-  //       const listJson = await listPromise.json();
-  //       // console.log(listJson)
-  //       setList(listJson);
-  //       console.log(listJson, list, 'in getList');
-  //     }catch(e){
-  //       console.error(e);
-  //     }
-  //   };
-  //     getList();
-  // },[list]);
-  // const [todoItems,setTodoItems] = useState(()=>{
-  //   const result = [];
-  //   for(let i = 0; i < list.length; ++i){
-  //     result.push(<TodoItem key = {i + list[i]} task = {list[i]} />);
-  //   }
-  //   console.log(result,'result')
-  //   return result;
-  // });
